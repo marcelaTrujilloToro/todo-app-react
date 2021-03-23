@@ -14,9 +14,7 @@ export const FormularioTarea: React.FunctionComponent<FormularioProps> = (props)
     return(
         <div>
             <form>
-                Titulo: 
-                
-                <input 
+                Titulo:<input 
                     type="text"
                     value = {nombre}
                     onChange = {(evento:any) =>{
