@@ -7,9 +7,8 @@ html{
   margin: 2px;
 }
 
-h1{
-  color: #0994a7; 
-
+h1, h3{
+  color: #0994a7;
 }
 
 input{
@@ -31,3 +30,4 @@ li::marker{
   list-style-type: square;
   font-size: 20px;
 }
+

@@ -21,7 +21,7 @@ export const FormularioTarea: React.FunctionComponent<FormularioProps> = (props)
                         setNombre(evento.target.value);
                     }}
                 />
-                <br/>
+               <br/>
                 Duracion: <input 
                     type="number"
                     value = {duracion}
@@ -40,7 +40,7 @@ export const FormularioTarea: React.FunctionComponent<FormularioProps> = (props)
                     <option value="iniciado">Iniciado</option>    
                     <option value="terminado">Terminado</option>    
                 </select>    
-                <br/>
+              
                 <button
                     type = "button"
                     onClick = { () => {
