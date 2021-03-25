@@ -13,16 +13,15 @@ export const FormularioTarea: React.FunctionComponent<FormularioProps> = (props)
 
     return(
         <div>
-            <form>
-                Titulo:<input 
+            <form className = "formTareas">
+                Título: <input 
                     type="text"
                     value = {nombre}
                     onChange = {(evento:any) =>{
                         setNombre(evento.target.value);
                     }}
                 />
-               <br/>
-                Duracion: <input 
+                Duración: <input 
                     type="number"
                     value = {duracion}
                     onChange = {(evento:any) => {
@@ -40,7 +39,7 @@ export const FormularioTarea: React.FunctionComponent<FormularioProps> = (props)
                     <option value="iniciado">Iniciado</option>    
                     <option value="terminado">Terminado</option>    
                 </select>    
-              
+                
                 <button
                     type = "button"
                     onClick = { () => {

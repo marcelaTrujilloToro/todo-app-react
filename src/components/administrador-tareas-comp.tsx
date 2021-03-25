@@ -23,7 +23,7 @@ const AdministradorTareas: React.FunctionComponent = () => {
       //axios es un objeto para consumir APIs (GET- POST)
       //recibe una respuesta cuyo atributo data es un arreglo de tareas
       axios.get<any, AxiosResponse<Tarea[]>>(
-        "https://sheet.best/api/sheets/5bc9fabf-7b99-454f-b925-8425815e300a"
+        "https://sheet.best/api/sheets/34a43395-8a6d-4ffc-a152-191dfade6c76"
       );
 
     respuestaPromesa
@@ -45,7 +45,7 @@ const AdministradorTareas: React.FunctionComponent = () => {
     const respuestaPromesa = axios
       //enviamos una tarea, la respuesta tiene un atributo data que es el arreglo de tareas
       .post<Tarea, AxiosResponse<Tarea[]>>(
-        "https://sheet.best/api/sheets/5bc9fabf-7b99-454f-b925-8425815e300a", // direccion del API
+        "https://sheet.best/api/sheets/34a43395-8a6d-4ffc-a152-191dfade6c76", // direccion del API
         tareaAAdicionar
       );
 
@@ -65,7 +65,7 @@ const AdministradorTareas: React.FunctionComponent = () => {
 
   const eliminarTareaFn = (tareaAEliminar: Tarea) => {
     const respuestaPromesa = axios.delete<Tarea, AxiosResponse<Tarea[]>>(
-      `https://sheet.best/api/sheets/5bc9fabf-7b99-454f-b925-8425815e300a/codigo/${tareaAEliminar.codigo}`
+      `https://sheet.best/api/sheets/34a43395-8a6d-4ffc-a152-191dfade6c76/codigo/${tareaAEliminar.codigo}`
     );
 
     respuestaPromesa
@@ -102,7 +102,7 @@ const AdministradorTareas: React.FunctionComponent = () => {
   const buscarTareaXNombreFn = (busqueda:string) => {
 
     const respuestaPromesa = axios.get<Tarea, AxiosResponse<Tarea[]>>(
-      `https://sheet.best/api/sheets/5bc9fabf-7b99-454f-b925-8425815e300a/nombre/*${busqueda}*`
+      `https://sheet.best/api/sheets/34a43395-8a6d-4ffc-a152-191dfade6c76/nombre/*${busqueda}*`
     );
 
     respuestaPromesa
@@ -110,6 +110,27 @@ const AdministradorTareas: React.FunctionComponent = () => {
         
         setArregloTareas(responseTareasDelServidor.data);
         
+      })
+
+
+
+      .catch((error: any) => {
+        alert("Hubo un error cargando las tareas de Google");
+      })
+
+      .then(() => {});
+      
+  };
+
+  const buscarTareaXEstadoFn = (busqueda:EstadoTarea) => {
+
+    const respuestaPromesa = axios.get<Tarea, AxiosResponse<Tarea[]>>(
+      `https://sheet.best/api/sheets/34a43395-8a6d-4ffc-a152-191dfade6c76/estado/*${busqueda}*`,
+    );
+
+    respuestaPromesa
+      .then((responseTareasDelServidor: AxiosResponse<Tarea[]>) => {
+        setArregloTareas(responseTareasDelServidor.data);
       })
 
       .catch((error: any) => {
@@ -123,20 +144,30 @@ const AdministradorTareas: React.FunctionComponent = () => {
   return (
     <div>     
       <div >
-        <div className="formulario">
-            <h1>Formulario de tareas</h1>
-            <FormularioTarea crearNuevaTareaFn={crearNuevaTareaFn} />
+        <div className = "formularios">
+          <div>
+              <h1>Formulario de tareas</h1>
+              <FormularioTarea crearNuevaTareaFn={crearNuevaTareaFn} />
+          </div>
+
+          <div >
+            <h1>Buscar tareas</h1>
+            <br></br>
+              <BusquedaTarea                   
+                  buscarTareaXNombreFn = {buscarTareaXNombreFn}
+                  buscarTareaXEstadoFn = {buscarTareaXEstadoFn}
+              />
+          </div>
         </div>
 
         <hr />
 
-        <div>
+        <div className = "listadoTareas">
           <h1>Listado de tareas</h1>
           <ListadoTareas
             arregloTareas={arregloTareas}
             eliminarTareaFn={eliminarTareaFn}
             modificarTareaFn={modificarTareaFn}
-            buscarTareaXNombreFn = {buscarTareaXNombreFn}
           />
         </div>
       </div>

@@ -1,23 +1,18 @@
 import DropdownEliminar from "./dropdown-eliminar-comp";
 import { EstadoTarea, Tarea } from "../models/tarea";
-import BusquedaTarea from "./busqueda-comp";
 
 type ListaProps = {
     arregloTareas: Array<Tarea>; 
     eliminarTareaFn: (tareaAElimininar:Tarea) => void; 
     modificarTareaFn: (tareaAModificar:Tarea, estadoNuevo: EstadoTarea) => void;
-    buscarTareaXNombreFn: (busquedaXNombre:string) => void; 
+     
 }
 
 const ListadoTareas: React.FunctionComponent<ListaProps> = (props) => {    
 
     return (
         <div>
-            <h3>Buscar tareas</h3>
-            <BusquedaTarea 
-                buscarTareaXNombreFn = {props.buscarTareaXNombreFn}
-            />
-            <br></br>
+  
             <ul>
                 {props.arregloTareas.map((tarea) =>{
                     return(
