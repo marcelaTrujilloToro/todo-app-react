@@ -18,7 +18,7 @@ const ListadoTareas: React.FunctionComponent<ListaProps> = (props) => {
                     return(
                         <li key = {tarea.codigo}>
                         Nombre tarea: <b>{tarea.nombre}</b>, 
-                        duración: <b>{tarea.duracion}</b> hora, 
+                        duracion: <b>{tarea.duracion}</b> hora, 
                         estado: {tarea.estado}
                         <DropdownEliminar 
                                 tareaAEliminar = {tarea}

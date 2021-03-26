@@ -2,6 +2,9 @@ import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { EstadoTarea, Tarea } from "../models/tarea";
 import BusquedaTarea from "./busqueda-comp";
+import ContadorGeneral from "./contador-general-comp";
+import ContadorHoras from "./contador-horas-comp";
+import ContadorXEstados from "./contador-x-estados-comp";
 import FormularioTarea from "./formulario-comp";
 import ListadoTareas from "./listado-tareas-comp";
 
@@ -23,7 +26,7 @@ const AdministradorTareas: React.FunctionComponent = () => {
       //axios es un objeto para consumir APIs (GET- POST)
       //recibe una respuesta cuyo atributo data es un arreglo de tareas
       axios.get<any, AxiosResponse<Tarea[]>>(
-        "https://sheet.best/api/sheets/34a43395-8a6d-4ffc-a152-191dfade6c76"
+        "https://sheet.best/api/sheets/70ab17b8-226d-4152-a895-560b4ec78c29"
       );
 
     respuestaPromesa
@@ -45,7 +48,7 @@ const AdministradorTareas: React.FunctionComponent = () => {
     const respuestaPromesa = axios
       //enviamos una tarea, la respuesta tiene un atributo data que es el arreglo de tareas
       .post<Tarea, AxiosResponse<Tarea[]>>(
-        "https://sheet.best/api/sheets/34a43395-8a6d-4ffc-a152-191dfade6c76", // direccion del API
+        "https://sheet.best/api/sheets/70ab17b8-226d-4152-a895-560b4ec78c29", // direccion del API
         tareaAAdicionar
       );
 
@@ -65,7 +68,7 @@ const AdministradorTareas: React.FunctionComponent = () => {
 
   const eliminarTareaFn = (tareaAEliminar: Tarea) => {
     const respuestaPromesa = axios.delete<Tarea, AxiosResponse<Tarea[]>>(
-      `https://sheet.best/api/sheets/34a43395-8a6d-4ffc-a152-191dfade6c76/codigo/${tareaAEliminar.codigo}`
+      `https://sheet.best/api/sheets/70ab17b8-226d-4152-a895-560b4ec78c29/codigo/${tareaAEliminar.codigo}`
     );
 
     respuestaPromesa
@@ -102,7 +105,7 @@ const AdministradorTareas: React.FunctionComponent = () => {
   const buscarTareaXNombreFn = (busqueda:string) => {
 
     const respuestaPromesa = axios.get<Tarea, AxiosResponse<Tarea[]>>(
-      `https://sheet.best/api/sheets/34a43395-8a6d-4ffc-a152-191dfade6c76/nombre/*${busqueda}*`
+      `https://sheet.best/api/sheets/70ab17b8-226d-4152-a895-560b4ec78c29/nombre/*${busqueda}*`
     );
 
     respuestaPromesa
@@ -125,7 +128,7 @@ const AdministradorTareas: React.FunctionComponent = () => {
   const buscarTareaXEstadoFn = (busqueda:EstadoTarea) => {
 
     const respuestaPromesa = axios.get<Tarea, AxiosResponse<Tarea[]>>(
-      `https://sheet.best/api/sheets/34a43395-8a6d-4ffc-a152-191dfade6c76/estado/*${busqueda}*`,
+      `https://sheet.best/api/sheets/70ab17b8-226d-4152-a895-560b4ec78c29/estado/*${busqueda}*`,
     );
 
     respuestaPromesa
@@ -162,13 +165,21 @@ const AdministradorTareas: React.FunctionComponent = () => {
 
         <hr />
 
-        <div className = "listadoTareas">
-          <h1>Listado de tareas</h1>
-          <ListadoTareas
-            arregloTareas={arregloTareas}
-            eliminarTareaFn={eliminarTareaFn}
-            modificarTareaFn={modificarTareaFn}
-          />
+        <div className = "listados">
+          <div className = "listadoTareas">
+            <h1>Listado de tareas</h1>
+            <ListadoTareas
+              arregloTareas={arregloTareas}
+              eliminarTareaFn={eliminarTareaFn}
+              modificarTareaFn={modificarTareaFn}
+            />
+          </div>
+
+          <div>
+            <ContadorGeneral></ContadorGeneral>
+            <ContadorXEstados></ContadorXEstados>
+            <ContadorHoras></ContadorHoras>
+          </div>
         </div>
       </div>
     </div>

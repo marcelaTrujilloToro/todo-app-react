@@ -12,17 +12,20 @@ h1, h3{
 }
 
 input{
-  border-radius: 2px;
+  border-color: #0994a7;
+  border-radius: 3px;
 }
 
 select{
-  border-radius: 2px;
+  border-radius: 3px;
+  border-color: #0994a7;
   background-color: #e4faf9;
 }
 
 button{
   background: linear-gradient(45deg, #74f7f0, #d2f5f3);
-  border-radius: 8px;
+  border-radius: 7px;
+  border-color: #0994a7;
 }
 
 li::marker{
@@ -44,3 +47,41 @@ li::marker{
   justify-content: center;
 }
 
+.listados{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;  
+}
+
+.listadoTareas{
+  border-right: 1px solid  #0994a7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.tarea{
+  height: 150px;
+  width: 150px;
+}
+
+.contenedorContador{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid  #0994a7 ;
+}
+
+.contador{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.contadorEstados{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
