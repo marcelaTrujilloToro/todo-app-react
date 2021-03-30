@@ -10,24 +10,27 @@ type ListaProps = {
 
 const ListadoTareas: React.FunctionComponent<ListaProps> = (props) => {    
 
-    return (
+    console.log(`arreglo tareas: ${JSON.stringify(props.arregloTareas)}`)
+    return (    
+        
         <div>
   
             <ul>
                 {props.arregloTareas.map((tarea) =>{
+                    {console.log(tarea.nombre)}
                     return(
-                        <li key = {tarea.codigo}>
-                        Nombre tarea: <b>{tarea.nombre}</b>, 
-                        duracion: <b>{tarea.duracion}</b> hora, 
-                        estado: {tarea.estado}
-                        <DropdownEliminar 
-                                tareaAEliminar = {tarea}
-                                eliminarTareaFn= {props.eliminarTareaFn}
+                        <li key = {tarea.id}>
+                                <b>{tarea.nombre}:</b> 
+                                duracion: <b>{tarea.duracion}</b> horas, 
+                                estado: {tarea.estado}
+                                <DropdownEliminar 
+                                        tareaAEliminar = {tarea}
+                                        eliminarTareaFn= {props.eliminarTareaFn}
 
-                                tareaAModificar= {tarea}
-                                estadoNuevo = {tarea.estado}
-                                modificarTareaFn={props.modificarTareaFn}
-                            />                                             
+                                        tareaAModificar= {tarea}
+                                        estadoNuevo = {tarea.estado}
+                                        modificarTareaFn={props.modificarTareaFn}
+                                />                                             
                         </li>
                     )
                 })}

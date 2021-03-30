@@ -22,17 +22,18 @@ const AdministradorTareas: React.FunctionComponent = () => {
     //https://sheet.best/admin/connection-detail/5bc9fabf-7b99-454f-b925-8425815e300a
     //Video youtube: https://www.youtube.com/watch?v=PM6S27tCvio&ab_channel=ValentinDespa
 
+    //json-server --watch backend/db.json --port 3001
+
     const respuestaPromesa =
       //axios es un objeto para consumir APIs (GET- POST)
       //recibe una respuesta cuyo atributo data es un arreglo de tareas
       axios.get<any, AxiosResponse<Tarea[]>>(
-        "https://sheet.best/api/sheets/70ab17b8-226d-4152-a895-560b4ec78c29"
+        "http://localhost:3001/tareas"
       );
 
     respuestaPromesa
       .then((responseTareasDelServidor: AxiosResponse<Tarea[]>) => {
         //todo sale bien
-        console.log({ responseTareasDelServidor });
         setArregloTareas(responseTareasDelServidor.data);
       })
       .catch((error: any) => {
@@ -48,8 +49,7 @@ const AdministradorTareas: React.FunctionComponent = () => {
     const respuestaPromesa = axios
       //enviamos una tarea, la respuesta tiene un atributo data que es el arreglo de tareas
       .post<Tarea, AxiosResponse<Tarea[]>>(
-        "https://sheet.best/api/sheets/70ab17b8-226d-4152-a895-560b4ec78c29", // direccion del API
-        tareaAAdicionar
+        `http://localhost:3001/tareas/`,tareaAAdicionar
       );
 
     respuestaPromesa
@@ -68,7 +68,7 @@ const AdministradorTareas: React.FunctionComponent = () => {
 
   const eliminarTareaFn = (tareaAEliminar: Tarea) => {
     const respuestaPromesa = axios.delete<Tarea, AxiosResponse<Tarea[]>>(
-      `https://sheet.best/api/sheets/70ab17b8-226d-4152-a895-560b4ec78c29/codigo/${tareaAEliminar.codigo}`
+      `http://localhost:3001/tareas/${tareaAEliminar.id}`
     );
 
     respuestaPromesa
@@ -92,7 +92,7 @@ const AdministradorTareas: React.FunctionComponent = () => {
   const modificarTareaFn = ( tareaAModificar: Tarea, estadoNuevo: EstadoTarea ) => {
     const nuevoArreglo = Array<Tarea>();
     for (let i = 0; i < arregloTareas.length; i++) {
-      if (tareaAModificar.codigo === arregloTareas[i].codigo) {
+      if (tareaAModificar.id === arregloTareas[i].id) {
         let nuevaTarea = { ...arregloTareas[i], estado: estadoNuevo };
         nuevoArreglo.push(nuevaTarea);
       } else {
@@ -105,7 +105,7 @@ const AdministradorTareas: React.FunctionComponent = () => {
   const buscarTareaXNombreFn = (busqueda:string) => {
 
     const respuestaPromesa = axios.get<Tarea, AxiosResponse<Tarea[]>>(
-      `https://sheet.best/api/sheets/70ab17b8-226d-4152-a895-560b4ec78c29/nombre/*${busqueda}*`
+      `http://localhost:3001/tareas/?nombre_like=${busqueda}`
     );
 
     respuestaPromesa
@@ -128,7 +128,7 @@ const AdministradorTareas: React.FunctionComponent = () => {
   const buscarTareaXEstadoFn = (busqueda:EstadoTarea) => {
 
     const respuestaPromesa = axios.get<Tarea, AxiosResponse<Tarea[]>>(
-      `https://sheet.best/api/sheets/70ab17b8-226d-4152-a895-560b4ec78c29/estado/*${busqueda}*`,
+      `http://localhost:3001/tareas/?estado=${busqueda}`,
     );
 
     respuestaPromesa

@@ -1,0 +1,52 @@
+{
+  "tareas": [
+    {
+      "id": 1,
+      "nombre": "Crear componente App",
+      "duracion": 3,
+      "estado": "noIniciado"
+    },
+    {
+      "id": 2,
+      "nombre": "Instalar Node",
+      "duracion": 1,
+      "estado": "iniciado"
+    },
+    {
+      "id": 3,
+      "nombre": "Realizar petición GET para cargar tareas",
+      "duracion": 1,
+      "estado": "terminado"
+    },
+    {
+      "id": 4,
+      "nombre": "Probar el API con Postman",
+      "duracion": 2,
+      "estado": "iniciado"
+    },
+    {
+      "id": 5,
+      "nombre": "Instalar React",
+      "duracion": 2,
+      "estado": "terminado"
+    },
+    {
+      "id": 6,
+      "nombre": "Crear repositorio en GitHub",
+      "duracion": 5,
+      "estado": "iniciado"
+    },
+    {
+      "id": 7,
+      "nombre": "Instalar Json Server",
+      "duracion": 3,
+      "estado": "terminado"
+    },
+    {
+      "id": 8,
+      "nombre": "Actualizar GitHub",
+      "duracion": 5,
+      "estado": "iniciado"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+
+Ejecutar el json-server--> en cmd:
+json-server --watch backend/db.json --port 3001
+
+busqueda de texto 'lo' en cualquier parte del json:
+    http://localhost:3001/tareas/?q=lo
+
+
+operador _like: busqueda de las tareas que tengan la palabra '..'
+    http://localhost:3001/tareas/?nombre_like=${variable}
+

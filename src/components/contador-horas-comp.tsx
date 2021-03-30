@@ -4,17 +4,25 @@ import { Tarea } from '../models/tarea';
 
 const ContadorHoras = () => {
 
-    const [contadorHoras, setContadorHoras] = useState(0)
-
+    const [contadorHoras, setContadorHoras] = useState <number>(0)
+ 
     const contarTareasFn = () => {
       const respuestaPromesa = axios.get<Tarea, AxiosResponse<Tarea[]>>(
-          `https://sheet.best/api/sheets/70ab17b8-226d-4152-a895-560b4ec78c29/duracion/*`,
+          `http://localhost:3001/tareas`,
         );
     
         respuestaPromesa
           .then((responseTareasDelServidor: AxiosResponse<Tarea[]>) => {
-            setContadorHoras(responseTareasDelServidor.data.length);
-            console.log(responseTareasDelServidor.data.length);
+            
+            let contHoras: number = 0;
+
+            for (let i = 0; i < responseTareasDelServidor.data.length; i++) {
+              
+              contHoras += responseTareasDelServidor.data[i].duracion;
+              console.log({contHoras});
+              
+            }            
+            setContadorHoras(contHoras);            
           })
     
           .catch((error: any) => {
@@ -24,10 +32,6 @@ const ContadorHoras = () => {
           .then(() => {});
     }
     contarTareasFn();
-
-
-
-
     return (
         <div className = "contenedorContador">
           <h3>Total horas entre las tareas</h3>

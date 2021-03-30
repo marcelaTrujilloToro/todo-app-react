@@ -14,50 +14,29 @@ const ContadorXEstados = () => {
 
     const contarTareasXEstadoFn = () => {
         const respuestaPromesa = axios.get<Tarea, AxiosResponse<Tarea[]>>(
-            `https://sheet.best/api/sheets/70ab17b8-226d-4152-a895-560b4ec78c29/estado/*${"noIniciado"}*`,
-          );
-      
+            `http://localhost:3001/tareas`
+        );      
         respuestaPromesa
         .then((responseTareasDelServidor: AxiosResponse<Tarea[]>) => {
-            setContadorXEstado({...contadorXEstado, contNoIniciado: responseTareasDelServidor.data.length});
-        })
-    
+            let contadorNOIni : number = 0;
+            let contadorIni : number = 0;
+            let contadorTer : number = 0;
+
+            for (let i = 0; i < responseTareasDelServidor.data.length; i++) {
+                if (responseTareasDelServidor.data[i].estado === 'noIniciado') {
+                    contadorNOIni ++;
+                }else if (responseTareasDelServidor.data[i].estado === 'iniciado') {
+                    contadorIni ++;    
+                } else {
+                    contadorTer ++;
+                }                
+            } 
+            setContadorXEstado({...contadorXEstado, contNoIniciado: contadorNOIni, contIniciado:contadorIni, contTerminado: contadorTer});
+        })    
         .catch((error: any) => {
-            alert("Hubo un error cargando las tareas de Google por estado no iniciado");
-        })
-    
-        .then(() => {});
-        //----------------------------------------------------------------------------------------------------
-        const respuestaPromesaIni = axios.get<Tarea, AxiosResponse<Tarea[]>>(
-            `https://sheet.best/api/sheets/70ab17b8-226d-4152-a895-560b4ec78c29/estado/*${"iniciado"}*`,
-          );
-      
-        respuestaPromesaIni
-        .then((responseTareasDelServidor: AxiosResponse<Tarea[]>) => {
-            setContadorXEstado({...contadorXEstado, contIniciado: responseTareasDelServidor.data.length});
-        })
-    
-        .catch((error: any) => {
-            alert("Hubo un error cargando las tareas de Google por estado iniciado");
-        })
-    
-        .then(() => {});
-        //----------------------------------------------------------------------------------------------------
-        const respuestaPromesaTer = axios.get<Tarea, AxiosResponse<Tarea[]>>(
-            `https://sheet.best/api/sheets/70ab17b8-226d-4152-a895-560b4ec78c29/estado/*${"terminado"}*`,
-          );
-      
-        respuestaPromesaTer
-        .then((responseTareasDelServidor: AxiosResponse<Tarea[]>) => {
-            setContadorXEstado({...contadorXEstado, contTerminado: responseTareasDelServidor.data.length});
-        })
-    
-        .catch((error: any) => {
-            alert("Hubo un error cargando las tareas de Google por estado terminado");
-        })
-    
-        .then(() => {});
-               
+            //alert("Hubo un error cargando las tareas de Google por estado");
+        })    
+        .then(() => {}); 
     }
     
     contarTareasXEstadoFn();

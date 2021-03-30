@@ -8,7 +8,7 @@ const ContadorGeneral = () => {
 
     const contarTareasFn = () => {
       const respuestaPromesa = axios.get<Tarea, AxiosResponse<Tarea[]>>(
-          `https://sheet.best/api/sheets/70ab17b8-226d-4152-a895-560b4ec78c29`,
+          `http://localhost:3001/tareas`,
         );
     
         respuestaPromesa

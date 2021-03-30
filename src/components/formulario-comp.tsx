@@ -44,11 +44,11 @@ export const FormularioTarea: React.FunctionComponent<FormularioProps> = (props)
                     type = "button"
                     onClick = { () => {
                         let nuevaTarea = new Tarea();
-                        nuevaTarea.codigo = Math.random().toString();
                         nuevaTarea.nombre = nombre;
                         nuevaTarea.duracion = duracion;
                         nuevaTarea.estado = estado;
                         props.crearNuevaTareaFn(nuevaTarea);
+                        console.log("tarea nueva " + JSON.stringify(nuevaTarea));
                     }}
                 >Guardar tarea
                 </button>
